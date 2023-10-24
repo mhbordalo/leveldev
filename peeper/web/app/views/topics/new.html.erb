@@ -1,0 +1,26 @@
+<%= form_with(model: @topic) do |form| %>
+  <% if @topic.errors.any? %>
+    <div style="color: red">
+      <ul>
+        <% @topic.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :titulo, style: "display: block" %>
+    <%= form.text_field :titulo %>
+  </div>
+
+  <div>
+    <%= form.submit "Salvar" %>
+  </div>
+<% end %>
+
+<%= render "form", topic: @topic %>
+
+<div>
+  <%= link_to "Tópicos", topics_path %>
+</div>

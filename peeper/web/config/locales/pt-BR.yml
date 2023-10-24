@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    errors:
+      models:
+        topic:
+          attributes:
+            titulo:
+              blank: "não pode ser vazio"
+              too_short: "Pelo menos %{count} caracteres"

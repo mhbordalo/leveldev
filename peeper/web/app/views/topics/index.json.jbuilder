@@ -1,0 +1,1 @@
+json.array! @Topics, partial: "topics/topic", as: :topic
