@@ -5,6 +5,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
+      #- ./api:/usr/src/peeper
       - ./web:/usr/src/peeper
       - bundle:/usr/local/bundle
     command: ./bin/rails-entrypoint.sh
@@ -16,5 +17,6 @@ services:
       - "8080:8080"
     volumes:
       - ./client:/usr/src/client
+    command: yarn dev
 volumes:
   bundle:
