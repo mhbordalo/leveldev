@@ -33,15 +33,15 @@ export default defineComponent({
   async mounted() {
     this.clearForm()
     await this.loadPosts()
-  }
+  },
 })
 </script>
 
 <template>
   New Post:
   <div>
-    Title: <input v-model="title"></input><br />
-    Body: <textarea v-model="body"></textarea><br />
+    Title: <input v-model="title" /><br />
+    Body: <textarea v-model="body" ></textarea><br />
     <button @click="createPost">Create Post</button>
   </div>
 
