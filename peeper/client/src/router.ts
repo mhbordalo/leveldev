@@ -1,23 +1,30 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 // import HelloWorld from './components/HelloWorld.vue'
-// import MyHello from './components/MyHello.vue'
+import Home from './components/Home.vue'
 import Posts from './components/Posts.vue'
+import Update from './components/Update.vue'
+import NotFound from './components/NotFound.vue'
 
 const routes: Array<RouteRecordRaw> = [
-  // {
-  //   path: '/hello',
-  //   name: 'hello',
-  //   component: HelloWorld
-  // },
-  // {
-  //   path: '/myhello',
-  //   name: 'my-hello',
-  //   component: MyHello
-  // },
+  {
+    path: '/',
+    name: 'home',
+    component: Home
+  },
+  {
+    path: '/posts/:id/update',
+    name: 'update',
+    component: Update
+  },
   {
     path: '/posts',
     name: 'posts',
     component: Posts
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: '404',
+    component: NotFound
   }
 ]
 

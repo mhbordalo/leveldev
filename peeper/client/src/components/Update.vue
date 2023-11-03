@@ -16,17 +16,24 @@ export default defineComponent({
     };
   },
   methods: {
-    clearForm() {
-      this.title = "";
-      this.body = "";
+    async getPost() {
+      const response = await api.get(`/posts/${this.$route.params.id}`);
+      this.title = response.data.title;
+      this.body = response.data.body;
     },
-    async createPost() {
-      await api.post("/posts", { title: this.title, body: this.body });
-      this.clearForm();
+    async updatePost() {
+      await api.patch(`/posts/${this.$route.params.id}`, {
+        title: this.title,
+        body: this.body,
+      });
+    },
+    async deletePost() {
+      await api.delete(`/posts/${this.$route.params.id}`);
+      this.$router.push("/");
     },
   },
   async mounted() {
-    this.clearForm();
+    await this.getPost();
   },
 });
 </script>
@@ -57,11 +64,19 @@ export default defineComponent({
         <v-btn
           variant="elevated"
           color="primary"
-          @click="createPost"
+          @click="updatePost"
         >
           Salvar Post
+        </v-btn>
+        <v-btn
+          variant="elevated"
+          color="secondary"
+          @click="deletePost"
+        >
+          Excluir Post
         </v-btn>
       </v-col>
     </v-row>
   </v-container>
 </template>
+

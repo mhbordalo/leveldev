@@ -1,15 +1,33 @@
 <script setup lang="ts"></script>
 
 <template>
-  <nav>
-    <router-link to="./hello">Hello</router-link>
-    <router-link to="./myhello">My Hello</router-link>
-  </nav>
-  <router-view/>
+  <v-toolbar
+    density="comfortable"
+    :elevation="8"
+    title="Blog"
+  >
+    <router-link to="/">
+      <v-btn
+        prepend-icon="$vuetify"
+        variant="text"
+      >
+        Inicio
+      </v-btn>
+    </router-link>
+    <router-link to="/posts">
+      <v-btn
+        prepend-icon="$vuetify"
+        variant="text"
+      >
+        Criar Post
+      </v-btn>
+    </router-link>
+  </v-toolbar>
+  <router-view />
 </template>
 
 <style scoped>
-.logo {
+/* .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
@@ -20,5 +38,5 @@
 }
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
-}
+} */
 </style>
