@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to comment_url(@comment), notice: "O comentário foi criado com sucesso." }
+        format.html { redirect_to [@post, @comment], notice: "O comentário foi criado com sucesso." }
         format.json { render :show, status: :created, location: [@post, @comment] }
       else
         format.json { render json: @comment.errors, status: :unprocessable_entity }
