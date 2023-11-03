@@ -1,10 +1,11 @@
 FROM node
 
+WORKDIR /usr/src/client
+
 RUN apt-get update -qq && apt-get install -y \
   apt-utils \
   build-essential
 
-RUN npm install -g vue
-RUN npm install -g @vue/cli
+COPY /client /usr/src/client
 
-WORKDIR /usr/src/client
+RUN yarn install
