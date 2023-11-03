@@ -3,6 +3,7 @@ import Home from './components/Home.vue'
 import Posts from './components/Posts.vue'
 import Update from './components/Update.vue'
 import NotFound from './components/NotFound.vue'
+import Comments from './components/Comments.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -21,6 +22,11 @@ const routes: Array<RouteRecordRaw> = [
     component: Posts
   },
   {
+    path: '/posts/:id',
+    name: 'comments',
+    component: Comments
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: '404',
     component: NotFound
@@ -33,4 +39,3 @@ const router = createRouter({
 })
 
 export default router
-

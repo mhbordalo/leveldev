@@ -4,8 +4,8 @@
   <v-toolbar
     density="comfortable"
     :elevation="8"
-    title="Blog"
   >
+  <v-toolbar-title class="font-weight-bold text-primary" :style="{ 'font-size': '25px', 'margin-left': '40px' }">BLOG LEVEL DEV</v-toolbar-title>
     <router-link to="/">
       <v-btn
         prepend-icon="$vuetify"

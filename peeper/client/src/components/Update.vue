@@ -26,6 +26,7 @@ export default defineComponent({
         title: this.title,
         body: this.body,
       });
+      this.$router.push("/");
     },
     async deletePost() {
       await api.delete(`/posts/${this.$route.params.id}`);

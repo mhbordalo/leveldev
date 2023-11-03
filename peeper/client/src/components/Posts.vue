@@ -23,6 +23,7 @@ export default defineComponent({
     async createPost() {
       await api.post("/posts", { title: this.title, body: this.body });
       this.clearForm();
+      this.$router.push("/");
     },
   },
   async mounted() {
