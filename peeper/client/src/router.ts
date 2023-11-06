@@ -3,7 +3,7 @@ import Home from './components/Home.vue'
 import Posts from './components/Posts.vue'
 import Update from './components/Update.vue'
 import NotFound from './components/NotFound.vue'
-import Comments from './components/Comments.vue'
+import Show from './components/Show.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -23,8 +23,8 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/posts/:id',
-    name: 'comments',
-    component: Comments
+    name: 'show',
+    component: Show
   },
   {
     path: "/:pathMatch(.*)*",

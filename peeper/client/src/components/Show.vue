@@ -31,14 +31,12 @@ export default defineComponent({
       this.body = response.data.body;
     },
     async createComments() {
-      await api.post("/comments", { body: this.comment, post_id: this.$route.params.id });
+      await api.post(`/posts/${this.$route.params.id}/comments`, { body: this.comment });
       this.clearForm();
       await this.getAllComments()
     },
     async getAllComments() {
-      const response = await api.get(`/comments`)
-      console.log("response", response)
-      // const response = await api.get(`/comments?post_id=${this.$route.params.id}`);
+      const response = await api.get(`/posts/${this.$route.params.id}/comments`)
       this.comments = response.data as Comments[];
     }
   },
@@ -53,10 +51,40 @@ export default defineComponent({
 
 <template>
   <v-container>
-    <h1>{{ title }}</h1>
-    <h2>{{ body }}</h2>
-    <hr/>
-    <h3>Novo Comentário:</h3>
+    <v-row class="mb-5">
+      <v-col>
+
+        <h1>{{ title }}</h1>
+        <p>{{ body }}</p>
+      </v-col>
+    </v-row>
+    <v-divider></v-divider>
+    
+    <v-row class="mt-4">
+      <v-col>
+        <h2>Comentários ({{ comments.length }}):</h2>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col
+        cols="12"
+        md="8"
+      >
+        <v-list lines="two">
+          <v-list-item
+            v-for="comment in comments"
+            :key="comment.id"
+            :title="comment.body"
+            prependIcon="mdi-comment"
+          >
+          </v-list-item>
+
+
+        </v-list>
+
+      </v-col>
+      
+    </v-row>
     <v-row
       align="center"
       justify="center"
@@ -76,14 +104,9 @@ export default defineComponent({
           color="primary"
           @click="createComments"
         >
-          Salvar Comentário
+          Enviar Comentário
         </v-btn>
       </v-col>
-    </v-row>
-    <v-row>
-      <div>
-        {{ comments }}
-      </div>
     </v-row>
   </v-container>
 </template>

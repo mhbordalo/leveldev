@@ -1,9 +1,10 @@
 class CommentsController < ApplicationController
+  before_action :set_post
   before_action :set_comment, only: %i[ show edit update destroy ]
 
   # GET /comments or /comments.json
   def index
-    @comments = Comment.all # where(params.post_id)
+    @comments = @post.comments
   end
 
   # GET /comments/1 or /comments/1.json
@@ -12,7 +13,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-    @comment = Comment.new
+    @comment = @posts.comments.new
   end
 
   # GET /comments/1/edit
@@ -21,14 +22,13 @@ class CommentsController < ApplicationController
 
   # POST /comments or /comments.json
   def create
-    @comment = Comment.new(comment_params)
+    @comment = @posts.comments.new(comment_params)
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to comment_url(@comment), notice: "Sucesso!" }
-        format.json { render :show, status: :created, location: @comment }
+        format.html { redirect_to comment_url(@comment), notice: "O comentário foi criado com sucesso." }
+        format.json { render :show, status: :created, location: [@post, @comment] }
       else
-        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -38,10 +38,9 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to comment_url(@comment), notice: "O comentário foi atualizado com sucesso." }
-        format.json { render :show, status: :ok, location: @comment }
+        format.html { redirect_to [@post, @comment], notice: "O comentário foi atualizado com sucesso." }
+        format.json { render :show, status: :ok, location: [@post, @comment] }
       else
-        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -52,7 +51,6 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: "O comentário foi deletado com sucesso." }
       format.json { head :no_content }
     end
   end
@@ -63,8 +61,12 @@ class CommentsController < ApplicationController
       @comment = Comment.find(params[:id])
     end
 
+    def set_post
+      @post = Post.find(params[:post_id])
+    end
+
     # Only allow a list of trusted parameters through.
     def comment_params
-      params.require(:comment).permit(:body, :post_id)
+      params.require(:comment).permit(:body)
     end
 end
