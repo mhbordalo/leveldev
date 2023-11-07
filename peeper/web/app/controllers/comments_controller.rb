@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-    @comment = @posts.comments.new
+    @comment = @post.comments.new
   end
 
   # GET /comments/1/edit
@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
 
   # POST /comments or /comments.json
   def create
-    @comment = @posts.comments.new(comment_params)
+    @comment = @post.comments.new(comment_params)
 
     respond_to do |format|
       if @comment.save

@@ -15,17 +15,20 @@ export default defineComponent({
       body: String,
     };
   },
+
   methods: {
     clearForm() {
       this.title = "";
       this.body = "";
     },
+
     async createPost() {
       await api.post("/posts", { title: this.title, body: this.body });
       this.clearForm();
       this.$router.push("/");
     },
   },
+
   async mounted() {
     this.clearForm();
   },
@@ -37,29 +40,24 @@ export default defineComponent({
     <h1>Novo Post:</h1>
     <v-row
       align="center"
-      justify="center"
-    >
-      <v-col
-        cols="12"
-        md="8"
-      >
+      justify="center">
+      <v-col cols="12" md="8">
         <v-text-field
           clearable
           label="Título"
           v-model="title"
-          variant="solo"
-        ></v-text-field>
+          variant="solo">
+        </v-text-field>
         <v-textarea
           clearable
           label="Descrição"
           v-model="body"
-          variant="solo"
-        ></v-textarea>
+          variant="solo">
+        </v-textarea>
         <v-btn
           variant="elevated"
           color="primary"
-          @click="createPost"
-        >
+          @click="createPost">
           Salvar Post
         </v-btn>
       </v-col>
